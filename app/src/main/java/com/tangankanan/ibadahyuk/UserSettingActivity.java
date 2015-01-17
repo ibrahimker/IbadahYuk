@@ -1,39 +1,47 @@
 package com.tangankanan.ibadahyuk;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.Spinner;
 
 
-public class UserSettingActivity extends ActionBarActivity {
+public class UserSettingActivity extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_setting);
+        final Spinner spinner = (Spinner) findViewById(R.id.spinnerGender);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String temp = spinner.getSelectedItem().toString();
+                ImageView imageView = (ImageView) findViewById(R.id.gambarUser);
+                if(temp.equals("Perempuan")){
+                    imageView.setImageResource(R.drawable.char_cewe);
+                }
+                else{
+                    imageView.setImageResource(R.drawable.char_cowo);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_user_setting, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void saveButton(View v){
+        Intent i=new Intent(getBaseContext(),SplashScreenActivity.class);
+        startActivity(i);
+        //Remove activity
+        finish();
     }
 }
