@@ -1,6 +1,8 @@
 package com.tangankanan.ibadahyuk;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -39,9 +41,26 @@ public class UserSettingActivity extends Activity{
     }
 
     public void saveButton(View v){
-        Intent i=new Intent(getBaseContext(),SplashScreenActivity.class);
-        startActivity(i);
-        //Remove activity
-        finish();
+        AlertDialog.Builder saveConfirmationBuilder = new AlertDialog.Builder(this);
+        saveConfirmationBuilder.setMessage("Are you sure you want to save?");
+        saveConfirmationBuilder.setCancelable(true);
+        saveConfirmationBuilder.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent i = new Intent(getBaseContext(), SplashScreenActivity.class);
+                        startActivity(i);
+                        //Remove activity
+                        finish();
+                    }
+                });
+        saveConfirmationBuilder.setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = saveConfirmationBuilder.create();
+        alert11.show();
     }
 }
