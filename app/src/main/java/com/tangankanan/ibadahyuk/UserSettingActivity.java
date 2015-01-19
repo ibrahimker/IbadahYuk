@@ -47,7 +47,7 @@ public class UserSettingActivity extends Activity{
         saveConfirmationBuilder.setPositiveButton("Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Intent i = new Intent(getBaseContext(), SplashScreenActivity.class);
+                        Intent i = new Intent(getBaseContext(), MainActivity.class);
                         startActivity(i);
                         //Remove activity
                         finish();
